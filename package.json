@@ -1,0 +1,35 @@
+{
+  "name": "halo-message-app",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "halo",
+      "halo-api"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**",
+      "**/@react-native/**",
+      "**/react",
+      "**/react-dom"
+    ]
+  },
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "api": "yarn workspace halo-api dev",
+    "seed": "yarn workspace halo-api seed",
+    "mobile": "yarn workspace halo start",
+    "android": "yarn workspace halo android",
+    "ios": "yarn workspace halo ios",
+    "pod": "cd halo/ios && pod install && cd ../..",
+    "clean": "rm -rf node_modules && rm -rf halo/node_modules && rm -rf halo-api/node_modules",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:restart": "docker-compose restart"
+  },
+  "devDependencies": {
+    "turbo": "latest"
+  }
+}

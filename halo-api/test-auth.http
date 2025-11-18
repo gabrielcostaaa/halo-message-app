@@ -1,0 +1,219 @@
+### 🔐 Halo API - Testes de Autenticação JWT
+### Base URL
+@baseUrl = http://localhost:3000
+@token = seu_token_aqui
+
+###############################################
+# 1️⃣ REGISTRO DE NOVO USUÁRIO
+###############################################
+
+### Registrar novo usuário
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "João Silva",
+  "username": "joao",
+  "password": "senha123",
+  "avatar": "https://i.pravatar.cc/150?u=joao"
+}
+
+### Registrar usuário sem avatar (opcional)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Maria Santos",
+  "username": "maria",
+  "password": "senha456"
+}
+
+### Teste: Username duplicado (deve retornar erro 409)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Alice Teste",
+  "username": "alice",
+  "password": "123456"
+}
+
+### Teste: Senha muito curta (deve retornar erro 400)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Teste Falha",
+  "username": "teste",
+  "password": "123"
+}
+
+###############################################
+# 2️⃣ LOGIN
+###############################################
+
+### Login com alice (usuário do seed)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "alice",
+  "password": "123456"
+}
+
+### Login com bruno (usuário do seed)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "bruno",
+  "password": "123456"
+}
+
+### Login com usuário recém criado
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "joao",
+  "password": "senha123"
+}
+
+### Teste: Senha incorreta (deve retornar erro 401)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "alice",
+  "password": "senha_errada"
+}
+
+### Teste: Usuário inexistente (deve retornar erro 401)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "usuario_inexistente",
+  "password": "123456"
+}
+
+###############################################
+# 3️⃣ ROTAS PROTEGIDAS (Requer Token JWT)
+###############################################
+
+### Listar todos os usuários (PROTEGIDO)
+GET {{baseUrl}}/users
+Authorization: Bearer {{token}}
+
+### Obter dados do usuário autenticado (PROTEGIDO)
+GET {{baseUrl}}/users/me
+Authorization: Bearer {{token}}
+
+### Buscar usuário por ID (PROTEGIDO)
+GET {{baseUrl}}/users/674158b2a0e1e72e50c15c5e
+Authorization: Bearer {{token}}
+
+### Teste: Acesso sem token (deve retornar erro 401)
+GET {{baseUrl}}/users
+
+### Teste: Acesso com token inválido (deve retornar erro 401)
+GET {{baseUrl}}/users
+Authorization: Bearer token_invalido_aqui
+
+###############################################
+# 4️⃣ FLUXO COMPLETO DE TESTE
+###############################################
+
+### Passo 1: Registrar um novo usuário
+# @name register
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Teste Completo",
+  "username": "teste_{{$randomInt}}",
+  "password": "senha123",
+  "avatar": "https://i.pravatar.cc/150?u={{$randomInt}}"
+}
+
+###
+
+### Passo 2: Extrair o token e salvar
+@newToken = {{register.response.body.access_token}}
+
+### Passo 3: Usar o token para acessar rota protegida
+GET {{baseUrl}}/users/me
+Authorization: Bearer {{newToken}}
+
+###############################################
+# 5️⃣ TESTES DE VALIDAÇÃO ZOD
+###############################################
+
+### Teste: Email inválido no username
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Teste",
+  "username": "us",
+  "password": "123456"
+}
+
+### Teste: Campos obrigatórios faltando
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Teste"
+}
+
+### Teste: Avatar com URL inválida
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Teste Avatar",
+  "username": "teste_avatar",
+  "password": "senha123",
+  "avatar": "not-a-valid-url"
+}
+
+###############################################
+# 6️⃣ HEALTHCHECK
+###############################################
+
+### Verificar se a API está online
+GET {{baseUrl}}
+
+###############################################
+# 📝 INSTRUÇÕES DE USO
+###############################################
+
+# 1. Instale a extensão "REST Client" no VS Code
+# 2. Certifique-se de que a API está rodando (yarn dev)
+# 3. Execute o seed: yarn seed
+# 4. Clique em "Send Request" acima de cada requisição
+# 5. Para usar o token, copie da resposta e cole na variável @token no topo
+# 6. Ou use o fluxo completo (seção 4) que extrai o token automaticamente
+
+###############################################
+# 🔑 CREDENCIAIS DO SEED
+###############################################
+
+# Username: alice | Senha: 123456
+# Username: bruno | Senha: 123456
+# Username: carlos | Senha: 123456
+# Username: diana | Senha: 123456
+# Username: eduardo | Senha: 123456
+
+###############################################
+# 📊 ESTRUTURA DO TOKEN JWT
+###############################################
+
+# Payload:
+# {
+#   "sub": "507f1f77bcf86cd799439011",  // ID do usuário
+#   "username": "alice",                 // Username
+#   "iat": 1700000000,                   // Issued at
+#   "exp": 1700604800                    // Expiration (7 dias)
+# }
