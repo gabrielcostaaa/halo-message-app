@@ -94,7 +94,7 @@ A aplicação é dividida em **quatro módulos principais** no frontend e **trê
 - Registro de novos usuários
 - Login com geração de JWT
 - Criptografia de senhas com bcrypt
-- [A_IMPLEMENTAR: Estratégia JWT Guard para rotas protegidas]
+- Estratégia JWT Guard para rotas protegidas
 
 #### **2. UsersModule**
 - CRUD completo de usuários
@@ -159,7 +159,7 @@ O design segue uma **estética dark mode minimalista** com destaque para a cor p
 | **DevOps** | **Docker Compose** | Orquestração de containers para MongoDB e Mongo Express |
 |  | **Yarn Workspaces** | Monorepo com workspaces isolados e otimização de dependências |
 |  | **Turbo** | Build system paralelo para desenvolvimento multi-pacote |
-| **Documentação** | **[A_IMPLEMENTAR: Swagger/OpenAPI]** | Documentação automática de endpoints REST |
+| **Documentação** | **Swagger/OpenAPI]** | Documentação automática de endpoints REST |
 
 ---
 
@@ -222,14 +222,6 @@ export class Message {
 halo-message-app/                    # 📦 Raiz do Monorepo
 ├── docker-compose.yml               # 🐳 Orquestração MongoDB + Mongo Express
 ├── package.json                     # 📄 Yarn Workspaces + Scripts root
-├── docs/                            # 📚 Documentação técnica do projeto
-│   ├── 00_CONTEXTO_PROJETO.md
-│   ├── 01_BACKEND_SPEC.md
-│   ├── 02_FRONTEND_SPEC.md
-│   ├── 03_INFRA_DADOS.md
-│   ├── 04_MONOREPO_ESTRUTURA.md
-│   ├── 05_GUIA_OPERACIONAL.md
-│   └── 06_ARQUITETURA_FRONTEND.md
 │
 ├── halo-api/                        # 🟢 Backend (NestJS)
 │   ├── src/
@@ -268,7 +260,7 @@ halo-message-app/                    # 📦 Raiz do Monorepo
     │   ├── components/              # 🧩 Componentes reutilizáveis
     │   │   ├── HaloAvatar/
     │   │   ├── HaloButton/
-    │   │   ├── HaloCard/            # Bolha de mensagem
+    │   │   ├── HaloCard/
     │   │   ├── HaloIcon/
     │   │   ├── HaloImage/
     │   │   ├── HaloInput/
@@ -316,13 +308,13 @@ halo-message-app/                    # 📦 Raiz do Monorepo
 
 ## 🗺️ Documentação da API
 
-**[A_IMPLEMENTAR: Swagger/OpenAPI]**
+**Swagger/OpenAPI**
 
 Toda a documentação dos endpoints da API será gerada automaticamente via **Swagger UI** integrado ao NestJS.
 
 **Quando implementado, acesse em:** `http://localhost:3000/api/docs`
 
-### Endpoints Atuais (Manual)
+### Endpoints Atuais
 
 #### **REST API**
 
@@ -375,7 +367,7 @@ yarn pod
 
 ### 3. Configuração de Ambiente (.env)
 
-**[A_IMPLEMENTAR: Arquivo .env]**
+** Arquivo .env**
 
 Crie um arquivo `.env` na raiz de `halo-api/` com as seguintes variáveis:
 
@@ -473,5 +465,5 @@ Este projeto está sob a licença **MIT**. Veja o arquivo `LICENSE` para mais de
 ---
 
 <p align="center">
-  Desenvolvido com 💙 por <a href="https://github.com/gabrielcostaaa">Gabriel Costa</a>
+  Desenvolvido por <a href="https://github.com/gabrielcostaaa">Gabriel Costa</a>
 </p>
