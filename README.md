@@ -148,7 +148,7 @@ O design segue uma **estética dark mode minimalista** com destaque para a cor p
 | **Backend** | **NestJS 11** | Framework Node.js modular e escalável com suporte nativo a TypeScript, injeção de dependências e arquitetura MVC |
 |  | **Socket.IO 4.8** | Comunicação bidirecional em tempo real com fallback automático e reconexão |
 |  | **Mongoose 8.19** | ODM para MongoDB com schemas tipados e validações integradas |
-|  | **[A_IMPLEMENTAR: JWT + Passport]** | Autenticação stateless com tokens seguros |
+|  | **JWT + Passport** | Autenticação stateless com tokens seguros |
 | **Frontend** | **React Native CLI 0.82** | Framework mobile nativo (não Expo) para performance otimizada e acesso total a módulos nativos |
 |  | **TypeScript 5.8** | Segurança de tipos e melhor DX (Developer Experience) |
 |  | **React Navigation 6** | Navegação nativa com Stack e Bottom Tabs |
@@ -320,10 +320,10 @@ Toda a documentação dos endpoints da API será gerada automaticamente via **Sw
 
 | Método | Endpoint | Descrição | Auth |
 | :--- | :--- | :--- | :--- |
-| `POST` | `/auth/register` | Registrar novo usuário | ❌ |
-| `POST` | `/auth/login` | Fazer login e obter token JWT | ❌ |
-| `GET` | `/users` | Listar todos os usuários | [A_IMPLEMENTAR: ✅] |
-| `GET` | `/messages/:userId` | Obter histórico de mensagens com um usuário | [A_IMPLEMENTAR: ✅] |
+| `POST` | `/auth/register` | Registrar novo usuário | ✅ |
+| `POST` | `/auth/login` | Fazer login e obter token JWT | ✅ |
+| `GET` | `/users` | Listar todos os usuários | ✅ |
+| `GET` | `/messages/:userId` | Obter histórico de mensagens com um usuário | ✅ |
 
 #### **WebSocket Events (Socket.IO)**
 
