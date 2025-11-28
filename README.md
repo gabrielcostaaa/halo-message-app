@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img alt="Status do Projeto" src="https://img.shields.io/badge/status-Em%20Desenvolvimento-yellow">
+  <img alt="Status do Projeto" src="https://img.shields.io/badge/status-Conclu%C3%ADdo-green">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-007ACC.svg?style=flat&logo=typescript&logoColor=white">
   <img alt="NestJS" src="https://img.shields.io/badge/NestJS-E0234E.svg?style=flat&logo=nestjs&logoColor=white">
   <img alt="React Native" src="https://img.shields.io/badge/React_Native-20232A.svg?style=flat&logo=react&logoColor=61DAFB">
